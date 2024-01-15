@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2014-2021 NicoHood
+Copyright (c) 2024 ilufang
 See the readme for credit to other people.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,35 +24,33 @@ THE SOFTWARE.
 // Include guard
 #pragma once
 
-// Software version
-#define HID_PROJECT_VERSION 282
+#include <Arduino.h>
+#include "HID.h"
+#include "HID-Settings.h"
+#include "../HID-APIs/IO4API.h"
 
-#if ARDUINO < 10607
-#error HID Project requires Arduino IDE 1.6.7 or greater. Please update your IDE.
-#endif
+class SingleIO4_ : public PluggableUSBModule, public IO4API {
+public:
+	SingleIO4_();
+	uint8_t getProtocol();
+	void wakeupHost();
 
-#if !defined(USBCON)
-#error HID Project can only be used with an USB MCU.
-#endif
+	virtual int sendReport(void *report, int length) final;
+	virtual int recvCommand() final;
+	virtual int recvReport(void *report, int length) final;
 
-// Include all HID libraries (.a linkage required to work) properly
-#include "SingleReport/SingleAbsoluteMouse.h"
-#include "MultiReport/AbsoluteMouse.h"
-#include "SingleReport/BootMouse.h"
-#include "MultiReport/ImprovedMouse.h"
-#include "SingleReport/SingleConsumer.h"
-#include "MultiReport/Consumer.h"
-#include "SingleReport/SingleGamepad.h"
-#include "MultiReport/Gamepad.h"
-#include "SingleReport/SingleSystem.h"
-#include "MultiReport/System.h"
-#include "SingleReport/RawHID.h"
-#include "SingleReport/BootKeyboard.h"
-#include "MultiReport/ImprovedKeyboard.h"
-#include "SingleReport/SingleNKROKeyboard.h"
-#include "MultiReport/NKROKeyboard.h"
-#include "MultiReport/SurfaceDial.h"
-#include "SingleReport/Touchscreen.h"
-#include "SingleReport/SingleIO4.h"
+protected:
+	// Implementation of the PUSBListNode
+	int getInterface(uint8_t* interfaceCount);
+	int getDescriptor(USBSetup& setup);
+	bool setup(USBSetup& setup);
 
-// Include Teensy HID afterwards to overwrite key definitions if used
+	EPTYPE_DESCRIPTOR_SIZE epType[2];
+	uint8_t protocol;
+	uint8_t idle;
+
+private:
+	uint8_t _recv_avail;
+};
+
+extern SingleIO4_ SingleIO4;

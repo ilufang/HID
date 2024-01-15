@@ -1,0 +1,71 @@
+# Append this to the end of your hardware/arduino/avr/board.txt
+# Restart Arduino IDE, and set board to "SEGA IO4 (<board type>)"
+
+##############################################################
+
+segaio4leo.name=SEGA IO4 (Leonardo)
+segaio4leo.vid.0=0x0ca3
+segaio4leo.pid.0=0x8036
+
+segaio4leo.upload.tool=avrdude
+segaio4leo.upload.protocol=avr109
+segaio4leo.upload.maximum_size=28672
+segaio4leo.upload.maximum_data_size=2560
+segaio4leo.upload.speed=57600
+segaio4leo.upload.disable_flushing=true
+segaio4leo.upload.use_1200bps_touch=true
+segaio4leo.upload.wait_for_upload_port=true
+
+segaio4leo.bootloader.tool=avrdude
+segaio4leo.bootloader.low_fuses=0xff
+segaio4leo.bootloader.high_fuses=0xd8
+segaio4leo.bootloader.extended_fuses=0xcb
+segaio4leo.bootloader.file=caterina/Caterina-Leonardo.hex
+segaio4leo.bootloader.unlock_bits=0x3F
+segaio4leo.bootloader.lock_bits=0x2F
+
+segaio4leo.build.mcu=atmega32u4
+segaio4leo.build.f_cpu=16000000L
+segaio4leo.build.vid=0x0ca3
+segaio4leo.build.pid=0x8036
+segaio4leo.build.usb_manufacturer="SEGA"
+segaio4leo.build.usb_product="I/O CONTROL BD;15257;01;90;1831;6679A;00;GOUT=14_ADIN=8,E_ROTIN=4_COININ=2_SWIN=2,E_UQ1=41,6"
+segaio4leo.build.board=AVR_LEONARDO
+segaio4leo.build.core=arduino
+segaio4leo.build.variant=leonardo
+segaio4leo.build.extra_flags={build.usb_flags}
+
+##############################################################
+
+segaio4micro.name=SEGA IO4 (Pro Micro)
+
+segaio4micro.vid.0=0x0ca3
+segaio4micro.pid.0=0x8037
+
+segaio4micro.upload.tool=avrdude
+segaio4micro.upload.protocol=avr109
+segaio4micro.upload.maximum_size=28672
+segaio4micro.upload.maximum_data_size=2560
+segaio4micro.upload.speed=57600
+segaio4micro.upload.disable_flushing=true
+segaio4micro.upload.use_1200bps_touch=true
+segaio4micro.upload.wait_for_upload_port=true
+
+segaio4micro.bootloader.tool=avrdude
+segaio4micro.bootloader.low_fuses=0xff
+segaio4micro.bootloader.high_fuses=0xd8
+segaio4micro.bootloader.extended_fuses=0xcb
+segaio4micro.bootloader.file=caterina/Caterina-Micro.hex
+segaio4micro.bootloader.unlock_bits=0x3F
+segaio4micro.bootloader.lock_bits=0x2F
+
+segaio4micro.build.mcu=atmega32u4
+segaio4micro.build.f_cpu=16000000L
+segaio4micro.build.vid=0x0ca3
+segaio4micro.build.pid=0x8036
+segaio4micro.build.usb_manufacturer="SEGA"
+segaio4micro.build.usb_product="I/O CONTROL BD;15257;01;90;1831;6679A;00;GOUT=14_ADIN=8,E_ROTIN=4_COININ=2_SWIN=2,E_UQ1=41,6"
+segaio4micro.build.board=AVR_MICRO
+segaio4micro.build.core=arduino
+segaio4micro.build.variant=micro
+segaio4micro.build.extra_flags={build.usb_flags}
